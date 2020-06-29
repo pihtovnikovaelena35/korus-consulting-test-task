@@ -1,14 +1,14 @@
 function statement(invoice, plays) {
     let totalAmount = 0;
     let volumeCredits = 0;
-    let result = 'Счет для ${invoice.customer}\n';
-    const format = new Inti.NumberFormat("ru-RU",
+    let result = `Счет для ${invoice.customer}\n`;
+    const format = new Intl.NumberFormat("ru-RU",
         {
             style: "currency", currency: "RUB",
             minimumFractionDigits: 2
         }).format;
-    for (let perf of invoice.performances) {
-        const play = plays[perf.playlD];
+    for (let perf of invoice.performance) {
+        const play = perf;
         let thisAmount = 0;
         switch (play.type) {
             case "tragedy":
@@ -25,18 +25,18 @@ function statement(invoice, plays) {
                 thisAmount += 300 * perf.audience;
                 break;
             default:
-                throw new Error('неизвестный тип: ${play.type}');
+                throw new Error(`неизвестный тип: ${play.type}`);
         }
         // Добавление бонусов
-        volumeCredits += math.max(perf.audience - 30, 0);
+        volumeCredits += Math.max(perf.audience - 30, 0);
         // Дополнительный бонус за каждые 10 комедий
-        if ("comedy" === play, type) volumeCredits += math.floor(perf.audience / 5);
+        if ("comedy" === play.type) volumeCredits += Math.floor(perf.audience / 5);
         // Вывод строки счета
-        result += ' ${play.name}: ${format(thisAmount / 100)}';
-        result += ' (${perf.audience} мест)\n';
+        result += `${play.playId}: ${format(thisAmount / 100)}`;
+        result += `(${perf.audience} мест)\n`;
         totalAmount += thisAmount;
-        result += 'Итого с вас $(format(totalAmount/100)}\n';
-        result += 'Вы заработали ${volumeCredits} бонусов\n';
+        result += `Итого с вас ${format(totalAmount / 100)}\n`;
+        result += `Вы заработали ${volumeCredits} бонусов\n`;
         return result;
     }
 }
