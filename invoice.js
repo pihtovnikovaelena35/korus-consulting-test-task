@@ -1,4 +1,10 @@
-function statement(invoice) {
+/**
+ * Общий счет для компании.
+ * Подсчет итоговой суммы и бонусов.
+ * 
+ * @param {*} invoice общая информация о заказчике и постановках.
+ */
+function getInvoice(invoice) {
     let totalAmount = 0;
     let volumeCredits = 0;
     let result = `Счет для ${invoice.customer}\n`;
@@ -21,6 +27,12 @@ function statement(invoice) {
     return result;
 }
 
+/**
+ * Подсчет цены за постановку
+ * 
+ * @param {*} audience размер аудитории 
+ * @param {*} type  тип постановки
+ */
 function calculatePerformancePrice(audience, type) {
     let thisAmount = 0;
     switch (type) {
@@ -44,6 +56,12 @@ function calculatePerformancePrice(audience, type) {
     return thisAmount;
 }
 
+/**
+ * Подсчет бонусов
+ * 
+ * @param {*} audience размер аудитории 
+ * @param {*} type тип постановки
+ */
 function calculateBonus(audience, type) {
     // Добавление бонусов
     let volumeCredits = Math.max(audience - 30, 0);
@@ -53,3 +71,5 @@ function calculateBonus(audience, type) {
     }
     return volumeCredits;
 }
+
+export default getInvoice;
