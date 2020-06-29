@@ -1,4 +1,3 @@
-// invoices.json
 [
     {
         "customer": "MDT",
@@ -20,3 +19,4 @@
             }
         ]
     }
+]  

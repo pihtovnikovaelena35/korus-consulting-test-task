@@ -39,3 +39,4 @@ function statement(invoice, plays) {
         result += 'Вы заработали ${volumeCredits} бонусов\n';
         return result;
     }
+}
