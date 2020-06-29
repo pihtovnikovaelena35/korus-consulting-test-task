@@ -29,13 +29,15 @@ function statement(invoice) {
         // Добавление бонусов
         volumeCredits += Math.max(perf.audience - 30, 0);
         // Дополнительный бонус за каждые 10 комедий
-        if ("comedy" === perf.type) volumeCredits += Math.floor(perf.audience / 5);
+        if ("comedy" === perf.type) {
+            volumeCredits += Math.floor(perf.audience / 5);
+        }
         // Вывод строки счета
         result += `${perf.playId}: ${format(thisAmount / 100)}`;
         result += `(${perf.audience} мест)\n`;
         totalAmount += thisAmount;
-        result += `Итого с вас ${format(totalAmount / 100)}\n`;
-        result += `Вы заработали ${volumeCredits} бонусов\n`;
-        return result;
     }
+    result += `Итого с вас ${format(totalAmount / 100)}\n`;
+    result += `Вы заработали ${volumeCredits} бонусов\n`;
+    return result;
 }
