@@ -8,6 +8,7 @@ function statement(invoice) {
             minimumFractionDigits: 2
         }).format;
     for (let perf of invoice.performance) {
+        
         let thisAmount = 0;
         switch (perf.type) {
             case "tragedy":
@@ -33,11 +34,11 @@ function statement(invoice) {
             volumeCredits += Math.floor(perf.audience / 5);
         }
         // Вывод строки счета
-        result += `${perf.playId}: ${format(thisAmount / 100)}`;
+        result += `${perf.playId}: ${format(thisAmount)}`;
         result += `(${perf.audience} мест)\n`;
         totalAmount += thisAmount;
     }
-    result += `Итого с вас ${format(totalAmount / 100)}\n`;
+    result += `Итого с вас ${format(totalAmount)}\n`;
     result += `Вы заработали ${volumeCredits} бонусов\n`;
     return result;
 }
