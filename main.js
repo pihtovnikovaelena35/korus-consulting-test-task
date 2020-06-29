@@ -9,13 +9,8 @@ function statement(invoice) {
         }).format;
     for (let perf of invoice.performance) {
         let thisAmount = calculatePerformancePrice(perf.audience, perf.type);
+        volumeCredits += calculateBonus(perf.audience, perf.type);
 
-        // Добавление бонусов
-        volumeCredits += Math.max(perf.audience - 30, 0);
-        // Дополнительный бонус за каждые 10 комедий
-        if ("comedy" === perf.type) {
-            volumeCredits += Math.floor(perf.audience / 5);
-        }
         // Вывод строки счета
         result += `${perf.playId}: ${format(thisAmount)}`;
         result += `(${perf.audience} мест)\n`;
@@ -47,4 +42,14 @@ function calculatePerformancePrice(audience, type) {
 
     }
     return thisAmount;
+}
+
+function calculateBonus(audience, type) {
+    // Добавление бонусов
+    let volumeCredits = Math.max(audience - 30, 0);
+    // Дополнительный бонус за каждые 10 комедий
+    if ("comedy" === type) {
+        volumeCredits += Math.floor(audience / 5);
+    }
+    return volumeCredits;
 }
